@@ -20,7 +20,11 @@ public class EmpresaModel {
     private String direccion;
 
     // usuario...
+
     // transaccion...
+    @ManyToOne
+    @JoinColumn(name = "transaccionId")
+    private TransaccionModel transaccion;
 
     @Column(name = "creado")
     private LocalDate creado;
@@ -82,5 +86,13 @@ public class EmpresaModel {
 
     public void setModificado(LocalDate modificado) {
         this.modificado = modificado;
+    }
+
+    public TransaccionModel getTransaccion() {
+        return transaccion;
+    }
+
+    public void setTransaccion(TransaccionModel transaccion) {
+        this.transaccion = transaccion;
     }
 }

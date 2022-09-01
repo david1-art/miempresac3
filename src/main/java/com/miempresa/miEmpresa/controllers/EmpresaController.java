@@ -3,10 +3,7 @@ package com.miempresa.miEmpresa.controllers;
 import com.miempresa.miEmpresa.entities.EmpresaModel;
 import com.miempresa.miEmpresa.services.EmpresaService;
 import com.miempresa.miEmpresa.services.Response;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -29,4 +26,8 @@ public class EmpresaController {
         return this.empresaService.createEmpresa(request);
     }
 
+    @DeleteMapping("deleteempresa/{id}")
+    public Response deleteEmpresa(@PathVariable int id){
+        return this.empresaService.deleteEmpresaById(id);
+    }
 }

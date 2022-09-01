@@ -3,10 +3,7 @@ package com.miempresa.miEmpresa.controllers;
 import com.miempresa.miEmpresa.entities.TransaccionModel;
 import com.miempresa.miEmpresa.services.Response;
 import com.miempresa.miEmpresa.services.TransaccionService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -27,5 +24,10 @@ public class TransaccionController {
     @PostMapping("createtransaccion")
     public Response createTransaccion(@RequestBody TransaccionModel request){
         return this.transaccionService.createTransaccion(request);
+    }
+
+    @DeleteMapping("deletetransaccion/{id}")
+    public Response deleteTransaccion(@PathVariable int id){
+        return this.transaccionService.deleteTransaccionById(id);
     }
 }

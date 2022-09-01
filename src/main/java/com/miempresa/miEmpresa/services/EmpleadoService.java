@@ -26,4 +26,19 @@ public class EmpleadoService {
         response.setMessage("empleado registrado correctamente");
         return response;
     }
+
+    public Response deleteEmpleadoById(int id){
+        Response response = new Response();
+        try {
+            this.empleadoRepository.deleteById(id);
+            response.setCode(200);
+            response.setMessage("usuario eliminado correctamente");
+            return response;
+        }
+        catch (Exception ex){
+            response.setCode(500);
+            response.setMessage("Error " + ex.getMessage());
+            return response;
+        }
+    }
 }

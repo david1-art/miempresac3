@@ -3,10 +3,7 @@ package com.miempresa.miEmpresa.controllers;
 import com.miempresa.miEmpresa.entities.PerfilModel;
 import com.miempresa.miEmpresa.services.PerfilService;
 import com.miempresa.miEmpresa.services.Response;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -27,5 +24,10 @@ public class PerfilController {
     @PostMapping("createperfil")
     public Response createPerfil(@RequestBody PerfilModel request){
         return this.perfilService.createPerfil(request);
+    }
+
+    @DeleteMapping("deleteperfil/{id}")
+    public Response deletePerfil(@PathVariable int id){
+        return this.perfilService.deletePerfilById(id);
     }
 }

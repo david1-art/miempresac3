@@ -26,4 +26,19 @@ public class TransaccionService {
         response.setMessage("transaccion registrada correctamente");
         return response;
     }
+
+    public Response deleteTransaccionById(int id){
+        Response response = new Response();
+        try{
+            this.transaccionRepository.deleteById(id);
+            response.setCode(200);
+            response.setMessage("usuario eliminado correctamente");
+            return response;
+        }
+        catch (Exception ex){
+            response.setCode(500);
+            response.setMessage("Error " + ex.getMessage());
+            return response;
+        }
+    }
 }
