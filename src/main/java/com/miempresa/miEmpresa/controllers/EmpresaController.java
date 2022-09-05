@@ -1,6 +1,6 @@
 package com.miempresa.miEmpresa.controllers;
 
-import com.miempresa.miEmpresa.entities.EmpresaModel;
+import com.miempresa.miEmpresa.entities.Empresa;
 import com.miempresa.miEmpresa.services.EmpresaService;
 import com.miempresa.miEmpresa.services.Response;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +16,25 @@ public class EmpresaController {
         this.empresaService = service;
     }
 
-    @RequestMapping("getempresa")
-    public ArrayList<EmpresaModel> getEmpresa(){
+    // Buscar todas las empresas
+    @RequestMapping("getempresas")
+    public ArrayList<Empresa> getEmpresas(){
         return this.empresaService.selectAll();
     }
 
+    // Buscar empresa por id
+    @RequestMapping("getempresa/{id}")
+    public Empresa getEmpresa(@PathVariable int id){
+        return this.empresaService.selectById(id);
+    }
+
+    // Crear una empresa
     @PostMapping("createempresa")
-    public Response createEmpresa(@RequestBody EmpresaModel request){
+    public Response createEmpresa(@RequestBody Empresa request){
         return this.empresaService.createEmpresa(request);
     }
 
+    // Eliminar una empresa
     @DeleteMapping("deleteempresa/{id}")
     public Response deleteEmpresa(@PathVariable int id){
         return this.empresaService.deleteEmpresaById(id);

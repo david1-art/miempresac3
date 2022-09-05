@@ -1,6 +1,6 @@
 package com.miempresa.miEmpresa.controllers;
 
-import com.miempresa.miEmpresa.entities.TransaccionModel;
+import com.miempresa.miEmpresa.entities.Transaccion;
 import com.miempresa.miEmpresa.services.Response;
 import com.miempresa.miEmpresa.services.TransaccionService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,12 @@ public class TransaccionController {
     }
 
     @RequestMapping("gettransaccion")
-    public ArrayList<TransaccionModel> getTransaccion(){
+    public ArrayList<Transaccion> getTransaccion(){
         return this.transaccionService.selectAll();
     }
 
     @PostMapping("createtransaccion")
-    public Response createTransaccion(@RequestBody TransaccionModel request){
+    public Response createTransaccion(@RequestBody Transaccion request){
         return this.transaccionService.createTransaccion(request);
     }
 

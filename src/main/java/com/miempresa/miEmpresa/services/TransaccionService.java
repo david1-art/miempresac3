@@ -1,10 +1,11 @@
 package com.miempresa.miEmpresa.services;
 
-import com.miempresa.miEmpresa.entities.TransaccionModel;
+import com.miempresa.miEmpresa.entities.Transaccion;
 import com.miempresa.miEmpresa.repository.InterfaceTransaccion;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class TransaccionService {
@@ -15,11 +16,24 @@ public class TransaccionService {
         this.transaccionRepository = rep;
     }
 
-    public ArrayList<TransaccionModel> selectAll(){
-        return (ArrayList<TransaccionModel>) this.transaccionRepository.findAll();
+    // Buscar todas las transacciones
+    public ArrayList<Transaccion> selectAll(){
+        return (ArrayList<Transaccion>) this.transaccionRepository.findAll();
     }
 
-    public Response createTransaccion(TransaccionModel data){
+    // Buscar transaccion por id
+    public Transaccion selectById(int id){
+        Optional<Transaccion> exists = this.transaccionRepository.findById(id);
+        if (exists.isPresent()){
+            return exists.get();
+        }
+        else{
+            return null;
+        }
+    }
+
+    // Crear transaccion
+    public Response createTransaccion(Transaccion data){
         Response response = new Response();
         this.transaccionRepository.save(data);
         response.setCode(200);
@@ -27,6 +41,7 @@ public class TransaccionService {
         return response;
     }
 
+    // Eliminar transaccion
     public Response deleteTransaccionById(int id){
         Response response = new Response();
         try{

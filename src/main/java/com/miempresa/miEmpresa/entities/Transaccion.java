@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "transaccion")
-public class TransaccionModel {
+public class Transaccion {
     // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +18,10 @@ public class TransaccionModel {
     // usuario...
     // empresa...
 
-    @Column(name = "creado")
-    private LocalDate creado;
-    @Column(name = "actualizado")
-    private LocalDate actualizado;
+    @Column(name = "fechaCreado")
+    private LocalDate fechaCreado;
+    @Column(name = "fechaActualizado")
+    private LocalDate fechaActualizado;
 
     //Getters & Setters
     public int getId() {
@@ -48,19 +48,19 @@ public class TransaccionModel {
         this.monto = monto;
     }
 
-    public LocalDate getCreado() {
-        return creado;
+    public LocalDate getFechaCreado() {
+        return fechaCreado;
     }
 
-    public void setCreado(LocalDate creado) {
-        this.creado = creado;
+    public void setFechaCreado(LocalDate fechaCreado) {
+        this.fechaCreado = fechaCreado;
     }
 
-    public LocalDate getActualizado() {
-        return actualizado;
+    public LocalDate getFechaActualizado() {
+        return fechaActualizado;
     }
 
-    public void setActualizado(LocalDate actualizado) {
-        this.actualizado = actualizado;
+    public void setFechaActualizado(LocalDate fechaActualizado) {
+        this.fechaActualizado = fechaActualizado;
     }
 }
