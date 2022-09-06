@@ -52,12 +52,12 @@ public class EmpleadoService {
         }*/
 
         // Validar que no se repita el correo
-        /*ArrayList<Empleado> exists = this.empleadoRepository.validarCorreo(data.getCorreoElectronico());
+        ArrayList<Empleado> exists = this.empleadoRepository.validarCorreoEmpleado(data.getCorreoElectronico());
         if (exists != null && exists.size() > 0){
             response.setCode(500);
             response.setMessage("el correo ya esta en uso");
             return response;
-        }*/
+        }
 
         this.empleadoRepository.save(data);
         response.setCode(200);
