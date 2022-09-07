@@ -55,4 +55,55 @@ public class PerfilService {
             return response;
         }
     }
+
+    // Actualizar perfil
+    public Response actualizarPerfil (Perfil data){
+        Response response = new Response();
+        if(data.getId() == 0){
+            response.setCode(500);
+            response.setMessage("Error, el Id del perfil no es valido" );
+            return response;
+        }
+        // Validar si el usuario existe
+        Perfil exists = selectById(data.getId());
+        if(exists == null){
+            response.setCode(500);
+            response.setMessage("Error, el perfil no existe en la base de datos");
+            return response;
+        }
+        // Validar imagen
+        if (data.getImagen().equals(null) || data.getImagen().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, imagen no especificada");
+            return response;
+        }
+        // Validar numero telefono
+        if (data.getNumeroTelefono().equals(null) || data.getNumeroTelefono().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, imagen no especificada");
+            return response;
+        }
+        // Validar fecha creado
+        if (data.getFechaCreado().equals(null) || data.getFechaCreado().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, imagen no especificada");
+            return response;
+        }
+        // Validar fecha actualizado
+        if (data.getFechaActualizado().equals(null) || data.getFechaActualizado().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, imagen no especificada");
+            return response;
+        }
+        // Actualizar datos
+        exists.setImagen(data.getImagen());
+        exists.setNumeroTelefono(data.getNumeroTelefono());
+        exists.setFechaCreado(data.getFechaCreado());
+        exists.setFechaActualizado(data.getFechaActualizado());
+
+        this.perfilRepository.save(exists);
+        response.setCode(200);
+        response.setMessage("Perfil modificado crectamente");
+        return response;
+    }
 }

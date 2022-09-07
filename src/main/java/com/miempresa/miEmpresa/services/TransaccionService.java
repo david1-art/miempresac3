@@ -56,4 +56,55 @@ public class TransaccionService {
             return response;
         }
     }
+
+    // Actualizar transaccion
+    public Response actualizarTransaccion(Transaccion data){
+        Response response = new Response();
+        if(data.getId() == 0){
+            response.setCode(500);
+            response.setMessage("Error, el Id de la transaccion no es valido" );
+            return response;
+        }
+        // Validar si la transaccion existe
+        Transaccion exists = selectById(data.getId());
+        if(exists == null){
+            response.setCode(500);
+            response.setMessage("Error, la transaccion no existe en la base de datos");
+            return response;
+        }
+        // Validar concepto
+        if (data.getConcepto().equals(null) || data.getConcepto().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, concepto no especificado");
+            return response;
+        }
+        // Validar monto
+        if (data.getMonto().equals(null) || data.getMonto().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, concepto no especificado");
+            return response;
+        }
+        // Validar fecha creado
+        if (data.getFechaCreado().equals(null) || data.getFechaCreado().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, concepto no especificado");
+            return response;
+        }
+        // Validar fecha Actualizado
+        if (data.getFechaActualizado().equals(null) || data.getFechaActualizado().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, concepto no especificado");
+            return response;
+        }
+        // Actualizar datos
+        exists.setConcepto(data.getConcepto());
+        exists.setMonto(data.getMonto());
+        exists.setFechaCreado(data.getFechaCreado());
+        exists.setFechaActualizado(data.getFechaActualizado());
+
+        this.transaccionRepository.save(exists);
+        response.setCode(200);
+        response.setMessage("Usuario modificado crectamente");
+        return response;
+    }
 }

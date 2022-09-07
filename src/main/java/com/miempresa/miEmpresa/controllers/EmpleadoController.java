@@ -39,4 +39,10 @@ public class EmpleadoController {
     public Response deleteEmpleado(@PathVariable int id){
         return this.empleadoService.deleteEmpleadoById(id);
     }
+
+    // Actualizar un empleado
+    @PutMapping("actualizarempleado/{id}")
+    public Response updateEmpleado(@RequestBody Empleado request){
+        return this.empleadoService.actualizarEmpleado(request);
+    }
 }

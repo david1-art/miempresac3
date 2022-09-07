@@ -39,4 +39,10 @@ public class EmpresaController {
     public Response deleteEmpresa(@PathVariable int id){
         return this.empresaService.deleteEmpresaById(id);
     }
+
+    // Actualizar empresa
+    @PutMapping("actualizarempresa/{id}")
+    public Response updateEmpresa(@RequestBody Empresa request){
+        return this.empresaService.actualizarEmpresa(request);
+    }
 }

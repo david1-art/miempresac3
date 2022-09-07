@@ -88,4 +88,81 @@ public class EmpleadoService {
         Matcher matcher =emailPat.matcher(correo);
         return matcher.find();
     }
+
+    // Actualizar empleado
+    public Response actualizarEmpleado (Empleado data){
+        Response response = new Response();
+        // validar id de empleado
+        if(data.getId() == 0){
+            response.setCode(500);
+            response.setMessage("Error, el Id del empleado no es valido" );
+            return response;
+        }
+        // Validar si el empleado existe
+        Empleado exists = selectById(data.getId());
+        if(exists == null){
+            response.setCode(500);
+            response.setMessage("Error, el empleado no existe en la base de datos");
+            return response;
+        }
+        // validar correo electronico
+        if (data.getCorreoElectronico().equals(null) || data.getCorreoElectronico().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Correo no especificado");
+            return response;
+        }
+        // validar perfil
+        if (data.getPerfil().equals(null) || data.getPerfil().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Perfil no especificado");
+            return response;
+        }
+        // validar rol
+        if (data.getRolName().equals(null) || data.getRolName().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Rol no especificado");
+            return response;
+        }
+        // validar empresa
+        /*if (data.getEmpresa().equals(null) || data.getEmpresa().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Empresa no especificada");
+            return response;
+        }*/
+        // validar transacciones
+        if (data.getTransacciones().equals(null) || data.getTransacciones().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Rol no especificado");
+            return response;
+        }
+        // validar fecha creado
+        if (data.getFechaCreado().equals(null) || data.getFechaCreado().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Rol no especificado");
+            return response;
+        }
+        // validar fecha actualizado
+        if (data.getFechaActualizado().equals(null) || data.getFechaActualizado().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Rol no especificado");
+            return response;
+        }
+
+        // Actualizar datos
+        exists.setCorreoElectronico(data.getCorreoElectronico());
+        exists.setPerfil(data.getPerfil());
+        exists.setRolName(data.getRolName());
+        /*exists.setRolName(data.getEmpresa());*/
+        exists.setTransacciones(data.getTransacciones());
+        exists.setFechaCreado(data.getFechaCreado());
+        exists.setFechaActualizado(data.getFechaActualizado());
+
+        this.empleadoRepository.save(exists);
+        response.setCode(200);
+        response.setMessage("Usuario modificado crectamente");
+        return response;
+    }
+
+    // Login...
+
 }

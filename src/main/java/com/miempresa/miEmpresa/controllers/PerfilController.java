@@ -39,4 +39,10 @@ public class PerfilController {
     public Response deletePerfil(@PathVariable int id){
         return this.perfilService.deletePerfilById(id);
     }
+
+    // Actualizar perfil
+    @PutMapping("actualizarperfil/{id}")
+    public Response updatePerfil(@RequestBody Perfil request){
+        return this.perfilService.actualizarPerfil(request);
+    }
 }

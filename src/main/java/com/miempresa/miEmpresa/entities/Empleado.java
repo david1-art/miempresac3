@@ -1,5 +1,7 @@
 package com.miempresa.miEmpresa.entities;
 
+import com.miempresa.miEmpresa.enums.EnumRoleName;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -19,6 +21,7 @@ public class Empleado {
     private Perfil perfil;
 
     // rol...
+    @Enumerated(EnumType.STRING)
     @Column(name = "rol")
     private EnumRoleName rolName;
 
