@@ -11,10 +11,13 @@ import java.util.ArrayList;
 public interface InterfaceEmpleado extends JpaRepository<Empleado, Integer> {
 
     // Query para validar ingreso por login -- aun no usamos login
-    /*@Query("SELECT e FROM empleado e WHERE e.correo = ?1 and e.password = ?2")
-    ArrayList<Empleado> validarCredenciales(String usuario, String password);*/
+    @Query("SELECT e FROM Empleado e WHERE e.correoElectronico = ?1 and e.contraseña = ?2")
+    ArrayList<Empleado> validarCredenciales(String correoElectronico, String contraseña);
 
     // Query para validar que el correo no se repita
     @Query("SELECT e FROM Empleado e WHERE e.correoElectronico = ?1")
     ArrayList<Empleado> validarCorreoEmpleado(String correoElectronico);
+
+    @Query("SELECT e FROM Empleado e WHERE e.correoElectronico = ?1")
+    Empleado findByUserName (String correoElectronico);
 }

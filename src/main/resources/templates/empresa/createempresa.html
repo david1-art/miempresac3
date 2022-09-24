@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master}">
+<head></head>
+<body>
+<div layout:fragment="content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header"><h3 class="text-center font-weight-light my-4">Registrar Empresa</h3></div>
+                            <div class="card-body">
+                                <form action="/empresa/createempresa" method="post">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input name="nombreEmpresa" class="form-control" type="text" placeholder="Ingrese el nombre de la empresa" />
+                                                <label>Nombre</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input name="direccionEmpresa" class="form-control" type="text" placeholder="Ingrese la direccion de la empresa" />
+                                                <label>Direccion</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input name="telefonoEmpresa" class="form-control" type="text" placeholder="Ingrese el telefono de la empresa" />
+                                                <label>Telefono</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input name="documentoEmpresa" class="form-control" type="text" placeholder="Ingrese el numero de documento de la empresa" />
+                                                <label>Documento</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input name="fechaCreado" class="form-control" type="text" placeholder="Ingrese la fecha de creación" />
+                                                <label>Fecha Creado</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input name="fechaModificado" class="form-control" type="text" placeholder="Ingrese la fecha de actualización" />
+                                                <label>Fecha Actualizado</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 mb-0">
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary btn-block" >Registrar Empresa</button>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 mb-0">
+                                        <div class="d-grid">
+                                            <a href="/empresa/listempresa" class="btn btn-danger" >Cancelar</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+</body>
+</html>

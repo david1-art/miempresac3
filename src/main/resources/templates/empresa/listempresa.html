@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master}">
+<head></head>
+<body>
+<div layout:fragment="content">
+      <div class="container-fluid px-4">
+
+        <div class="card-body">
+          <div class="mt-4 mb-0">
+            <h1 class="mt-4">Empresas Registradas</h1>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <a href="/empresa/createempresa" class="btn btn-primary  pull-right" >Crear Empresa</a>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <!--div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            DataTable Example
+          </div-->
+          <div class="card-body">
+            <table id="datatablesSimple">
+              <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Documento</th>
+                <th>Empleados</th>
+                <th>Transacciones</th>
+                <th>Fecha Creado</th>
+                <th>Fecha Modificado</th>
+                <th>Opciones</th>
+              </tr>
+              </thead>
+              <tfoot>
+              <tr>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Documento</th>
+                <th>Empleados</th>
+                <th>Transacciones</th>
+                <th>Fecha Creado</th>
+                <th>Fecha Modificado</th>
+                <th>Opciones</th>
+              </tr>
+              </tfoot>
+              <tbody>
+              <tr th:each="emp:${misempresas}">
+                <td th:text="${emp.nombreEmpresa}"></td>
+                <td th:text="${emp.direccionEmpresa}"></td>
+                <td th:text="${emp.telefonoEmpresa}"></td>
+                <td th:text="${emp.documentoEmpresa}"></td>
+                <td th:text="${emp.empleados}"></td>
+                <td th:text="${emp.transacciones}"></td>
+                <td th:text="${emp.fechaCreado}"></td>
+                <td th:text="${emp.fechaModificado}"></td>
+                <td>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+</div>
+</body>
+</html>

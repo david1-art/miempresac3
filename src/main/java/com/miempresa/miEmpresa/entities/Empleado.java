@@ -1,6 +1,6 @@
 package com.miempresa.miEmpresa.entities;
 
-import com.miempresa.miEmpresa.enums.EnumRoleName;
+import com.miempresa.miEmpresa.enums.RoleName;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,8 +12,11 @@ public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "correoElectronico", unique = true)
+    @Column(name = "correoElectronico", unique = true, nullable = false)
     private String correoElectronico;
+
+    @Column(name = "contraseña", nullable = false)
+    private String contraseña;
 
     // perfil...
     @OneToOne
@@ -21,14 +24,14 @@ public class Empleado {
     private Perfil perfil;
 
     // rol...
-    @Enumerated(EnumType.STRING)
-    @Column(name = "rol")
-    private EnumRoleName rolName;
+    @ManyToOne
+    @JoinColumn(name = "rolId")
+    private RoleName rol;
 
-    // empresa...genera error al correr el proyecto
-    /*@OneToMany
+    //empresa...genera error al correr el proyecto
+    @ManyToOne
     @JoinColumn(name = "empresaId")
-    private Empresa empresa;*/
+    private Empresa empresa;
 
     // transacciones...
     @ManyToOne
@@ -57,6 +60,14 @@ public class Empleado {
         this.correoElectronico = correoElectronico;
     }
 
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
     public LocalDate getFechaCreado() {
         return fechaCreado;
     }
@@ -81,12 +92,12 @@ public class Empleado {
         this.perfil = perfil;
     }
 
-    public EnumRoleName getRolName() {
-        return rolName;
+    public RoleName getRol() {
+        return rol;
     }
 
-    public void setRolName(EnumRoleName rolName) {
-        this.rolName = rolName;
+    public void setRol(RoleName rol) {
+        this.rol = rol;
     }
 
     public Transaccion getTransacciones() {
@@ -95,5 +106,13 @@ public class Empleado {
 
     public void setTransacciones(Transaccion transacciones) {
         this.transacciones = transacciones;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }

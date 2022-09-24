@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master}">
+<head></head>
+<body>
+<div layout:fragment="content">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-7">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+              <div class="card-header"><h3 class="text-center font-weight-light my-4">Registrar Empleado</h3></div>
+              <div class="card-body">
+                <form action="/empleado/createempleado" method="post">
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <select name="empresa" class="form-control" type="text" placeholder="Seleccione la empresa">
+                          <option>Seleccione Empresa</option>
+                          <option th:each="emp:${misempresas}" th:value="${emp.id}" th:text="${emp.nombreEmpresa}"></option>
+                        </select>
+                        <label>Empresa</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select name="perfil" class="form-control" type="text" placeholder="Seleccione el perfil">
+                          <option>Seleccione el perfil</option>
+                          <option th:each="per:${misperfiles}" th:value="${per.id}" th:text="${per.imagen}"></option>
+                        </select>
+                        <label>Perfil</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="correoElectronico" required class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                    <label for="inputEmail">Correo Electronico</label>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input name="contraseña" required class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
+                        <label for="inputPassword">Contraseña</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input name="validaContraseña" required class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                        <label for="inputPasswordConfirm">Confirmar Contraseña</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input name="fechaCreado" class="form-control" type="text" placeholder="Ingrese la fecha de creación" />
+                        <label>Fecha Creado</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input name="fechaActualizado" class="form-control" type="text" placeholder="Ingrese la fecha de actualización" />
+                        <label>Fecha Actualizado</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-4 mb-0">
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-primary btn-block" >Registrar Empleado</button>
+                    </div>
+                  </div>
+                  <div class="mt-4 mb-0">
+                    <div class="d-grid">
+                      <a href="/empleado/listempleado" class="btn btn-danger" >Cancelar</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</body>
+</html>

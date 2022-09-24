@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master}">
+<head></head>
+<body>
+<div layout:fragment="content">
+      <div class="container-fluid px-4">
+
+        <div class="card-body">
+          <div class="mt-4 mb-0">
+            <h1 class="mt-4">Epleados Registrados</h1>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <a href="/empleado/createempleado" class="btn btn-primary  pull-right" >Crear Empleado</a>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <!--div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            DataTable Example
+          </div-->
+          <div class="card-body">
+            <table id="datatablesSimple">
+              <thead>
+              <tr>
+                <th>Correo Electronico</th>
+                <th>Perfil</th>
+                <th>Rol</th>
+                <th>Empresa</th>
+                <th>Transacciones</th>
+                <th>Fecha Creado</th>
+                <th>Fecha Modificado</th>
+                <th>Opciones</th>
+              </tr>
+              </thead>
+              <tfoot>
+              <tr>
+                <th>Correo Electronico</th>
+                <th>Perfil</th>
+                <th>Rol</th>
+                <th>Empresa</th>
+                <th>Transacciones</th>
+                <th>Fecha Creado</th>
+                <th>Fecha Modificado</th>
+                <th>Opciones</th>
+              </tr>
+              </tfoot>
+              <tbody>
+
+              <tr th:each="empl:${misempleados}">
+                <td th:text="${empl.correoElectronico}"></td>
+                <td th:text="${empl.perfil.imagen}"></td>
+                <td th:text="${empl.rol.nombreRol}"></td>
+                <td th:text="${empl.empresa.nombreEmpresa}"></td>
+                <td th:text="${empl.transacciones.concepto}"></td>
+                <td th:text="${empl.fechaCreado}"></td>
+                <td th:text="${empl.fechaActualizado}"></td>
+                <td>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <a th:href="@{/empleado/editempleado/{postId}(postId=${empl.id})}" type="button" class="btn btn-success">Editar</a>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+</div>
+</body>
+</html>

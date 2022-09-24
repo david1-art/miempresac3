@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master}">
+<head></head>
+<body class="sb-nav-fixed">
+<div layout:fragment="content">
+            <div class="container-fluid px-4">
+
+                <div class="card-body">
+                    <div class="mt-4 mb-0">
+                        <h1 class="mt-4">Transacciones Registradas</h1>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="/transaccion/createtransaccion" class="btn btn-primary  pull-right" >Registrar Transaccion</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <!--div class="card-header">
+                      <i class="fas fa-table me-1"></i>
+                      DataTable Example
+                    </div-->
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Monto</th>
+                                <th>Empresa</th>
+                                <th>Empleado</th>
+                                <th>Fecha Creado</th>
+                                <th>Fecha Actualizado</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Monto</th>
+                                <th>Empresa</th>
+                                <th>Empleado</th>
+                                <th>Fecha Creado</th>
+                                <th>Fecha Actualizado</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="tra:${mistransacciones}">
+                                <td th:text="${tra.concepto}"></td>
+                                <td th:text="${tra.monto}"></td>
+                                <td th:text="${tra.empresa}"></td>
+                                <td th:text="${tra.empleado}"></td>
+                                <td th:text="${tra.fechaCreado}"></td>
+                                <td th:text="${tra.fechaActualizado}"></td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-success">Editar</button>
+                                        <button type="button" class="btn btn-danger">Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+</div>
+</body>
+</html>

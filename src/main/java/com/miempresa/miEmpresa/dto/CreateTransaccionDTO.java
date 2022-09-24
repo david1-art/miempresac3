@@ -1,42 +1,18 @@
-package com.miempresa.miEmpresa.entities;
+package com.miempresa.miEmpresa.dto;
 
-import javax.persistence.*;
+import com.miempresa.miEmpresa.entities.Empleado;
+import com.miempresa.miEmpresa.entities.Empresa;
+
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "transaccion")
-public class Transaccion {
-    // Atributos
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "concepto")
+public class CreateTransaccionDTO {
+
     private String concepto;
-    @Column(name = "monto")
     private String monto;
-
-    // usuario...
-    @ManyToOne
-    @JoinColumn(name = "empleado")
     private Empleado empleado;
-    // empresa...
-    @ManyToOne
-    @JoinColumn(name = "empresaid")
     private Empresa empresa;
-
-    @Column(name = "fechaCreado")
     private LocalDate fechaCreado;
-    @Column(name = "fechaActualizado")
     private LocalDate fechaActualizado;
-
-    //Getters & Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getConcepto() {
         return concepto;

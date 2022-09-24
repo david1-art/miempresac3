@@ -1,47 +1,15 @@
-package com.miempresa.miEmpresa.entities;
+package com.miempresa.miEmpresa.dto;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "empresa")
-public class Empresa {
-    // Atributos
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "nombreEmpresa", unique = true, nullable = false)
+public class CreateEmpresaDTO {
+
     private String nombreEmpresa;
-    @Column(name = "documentoEmpresa", unique = true, nullable = false)
     private String documentoEmpresa;
-    @Column(name = "telefonoEmpresa")
     private String telefonoEmpresa;
-    @Column(name = "direccionEmpresa")
     private String direccionEmpresa;
-
-    // usuario...
-    @ManyToOne
-    @JoinColumn(name = "empleadosId")
-    private Transaccion empleados;
-
-    // transacciones...
-    @ManyToOne
-    @JoinColumn(name = "transaccionesId")
-    private Transaccion transacciones;
-
-    @Column(name = "fechaCreado")
     private LocalDate fechaCreado;
-    @Column(name = "fechaModificado")
     private LocalDate fechaModificado;
-
-    // Getters & Settes
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNombreEmpresa() {
         return nombreEmpresa;
@@ -89,21 +57,5 @@ public class Empresa {
 
     public void setFechaModificado(LocalDate fechaModificado) {
         this.fechaModificado = fechaModificado;
-    }
-
-    public Transaccion getTransacciones() {
-        return transacciones;
-    }
-
-    public void setTransacciones(Transaccion transacciones) {
-        this.transacciones = transacciones;
-    }
-
-    public Transaccion getEmpleados() {
-        return empleados;
-    }
-
-    public void setEmpleados(Transaccion empleados) {
-        this.empleados = empleados;
     }
 }

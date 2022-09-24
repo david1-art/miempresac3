@@ -2,6 +2,7 @@ package com.miempresa.miEmpresa.services;
 
 import com.miempresa.miEmpresa.entities.Empleado;
 import com.miempresa.miEmpresa.repository.InterfaceEmpleado;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,6 +35,14 @@ public class EmpleadoService {
         }
     }
 
+    // buscar por correo Electronico
+    public Empleado selectByUserName (String username){
+        Empleado exists = this.empleadoRepository.findByUserName(username);
+        return exists;
+    }
+
+
+
     // Crear un empleado
     public Response createEmpleado(Empleado data){
         Response response = new Response();
@@ -44,12 +53,12 @@ public class EmpleadoService {
             return  response;
         }
 
-        //validar password -- aun no tenemos la casilla de password
-        /*if (data.getPassword().equals(null) && data.getPassword().equals("")) {
+        // validar password -- aun no tenemos la casilla de password
+        if (data.getContraseña().equals(null) && data.getContraseña().equals("")) {
             response.setCode(500);
             response.setMessage("Contraseña incorrecta");
             return response;
-        }*/
+        }
 
         // Validar que no se repita el correo
         ArrayList<Empleado> exists = this.empleadoRepository.validarCorreoEmpleado(data.getCorreoElectronico());
@@ -58,6 +67,10 @@ public class EmpleadoService {
             response.setMessage("el correo ya esta en uso");
             return response;
         }
+
+        // Encriptar contraseña
+        BCryptPasswordEncoder encrypt = new BCryptPasswordEncoder();
+        data.setContraseña(encrypt.encode(data.getContraseña()));
 
         this.empleadoRepository.save(data);
         response.setCode(200);
@@ -118,17 +131,17 @@ public class EmpleadoService {
             return response;
         }
         // validar rol
-        if (data.getRolName().equals(null) || data.getRolName().equals("")){
+        if (data.getRol().equals(null) || data.getRol().equals("")){
             response.setCode(500);
             response.setMessage("Error, Rol no especificado");
             return response;
         }
         // validar empresa
-        /*if (data.getEmpresa().equals(null) || data.getEmpresa().equals("")){
+        if (data.getEmpresa().equals(null) || data.getEmpresa().equals("")){
             response.setCode(500);
             response.setMessage("Error, Empresa no especificada");
             return response;
-        }*/
+        }
         // validar transacciones
         if (data.getTransacciones().equals(null) || data.getTransacciones().equals("")){
             response.setCode(500);
@@ -151,8 +164,8 @@ public class EmpleadoService {
         // Actualizar datos
         exists.setCorreoElectronico(data.getCorreoElectronico());
         exists.setPerfil(data.getPerfil());
-        exists.setRolName(data.getRolName());
-        /*exists.setRolName(data.getEmpresa());*/
+        exists.setRol(data.getRol());
+        exists.setEmpresa(data.getEmpresa());
         exists.setTransacciones(data.getTransacciones());
         exists.setFechaCreado(data.getFechaCreado());
         exists.setFechaActualizado(data.getFechaActualizado());
@@ -163,6 +176,94 @@ public class EmpleadoService {
         return response;
     }
 
-    // Login...
+    public Response actualizarEmpleadoDTO (Empleado data){
+        Response response = new Response();
+        // validar id de empleado
+        if(data.getId() == 0){
+            response.setCode(500);
+            response.setMessage("Error, el Id del empleado no es valido" );
+            return response;
+        }
+        // Validar si el empleado existe
+        Empleado exists = selectById(data.getId());
+        if(exists == null){
+            response.setCode(500);
+            response.setMessage("Error, el empleado no existe en la base de datos");
+            return response;
+        }
+        // validar perfil
+        if (data.getPerfil().equals(null) || data.getPerfil().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Perfil no especificado");
+            return response;
+        }
+        // validar rol
+        if (data.getRol().equals(null) || data.getRol().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Rol no especificado");
+            return response;
+        }
+        // validar empresa
+        if (data.getEmpresa().equals(null) || data.getEmpresa().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Empresa no especificada");
+            return response;
+        }
+        // validar transacciones
+        if (data.getTransacciones().equals(null) || data.getTransacciones().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Rol no especificado");
+            return response;
+        }
+        // validar fecha actualizado
+        if (data.getFechaActualizado().equals(null) || data.getFechaActualizado().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, Rol no especificado");
+            return response;
+        }
+
+        // Actualizar datos
+        exists.setPerfil(data.getPerfil());
+        exists.setRol(data.getRol());
+        exists.setEmpresa(data.getEmpresa());
+        exists.setTransacciones(data.getTransacciones());
+        exists.setFechaActualizado(data.getFechaActualizado());
+
+        this.empleadoRepository.save(exists);
+        response.setCode(200);
+        response.setMessage("Usuario modificado crectamente");
+        return response;
+    }
+
+    // Login
+
+    public Response loginEmpleado(Empleado data){
+        Response response = new Response();
+
+        // Validar datos
+        if (!validarCorreoElectronico(data.getCorreoElectronico())){
+            response.setCode(500);
+            response.setMessage("Error, correo / usuario no válido.");
+        }
+
+        // Validar contraseña
+        if(data.getContraseña().equals(null) || data.getContraseña().equals("")){
+            response.setCode(500);
+            response.setMessage("Error, contraseña incorrecta.");
+            return  response;
+        }
+
+        ArrayList<Empleado> exists = this.empleadoRepository.validarCredenciales(data.getCorreoElectronico(), data.getContraseña());
+        if(exists != null && exists.size() > 0){
+            response.setCode(200);
+            response.setMessage("Usuario autenticado correctamente.");
+            return  response;
+        }
+
+        response.setCode(500);
+        response.setMessage("Error, sus datos de acceso no son correctos");
+        return  response;
+    }
+
 
 }
